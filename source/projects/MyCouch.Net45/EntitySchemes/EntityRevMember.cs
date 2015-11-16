@@ -23,17 +23,18 @@ namespace MyCouch.EntitySchemes
             if (membername.Equals("_rev", StringComparison.OrdinalIgnoreCase))
                 return 0 * factor;
 
-            if (membername.Equals(string.Concat(entityType.Name, "rev"), StringComparison.OrdinalIgnoreCase))
+            if (membername.Equals("rev", StringComparison.OrdinalIgnoreCase))
                 return 1 * factor;
 
-            if (membername.Equals("documentrev", StringComparison.OrdinalIgnoreCase))
+            if (membername.Equals(string.Concat(entityType.Name, "rev"), StringComparison.OrdinalIgnoreCase))
                 return 2 * factor;
 
-            if (membername.Equals("entityrev", StringComparison.OrdinalIgnoreCase))
-                return 3 * factor;
+            //if (membername.Equals("documentrev", StringComparison.OrdinalIgnoreCase))
+            //    return 2 * factor;
 
-            if (membername.Equals("rev", StringComparison.OrdinalIgnoreCase))
-                return 4 * factor;
+            //if (membername.Equals("entityrev", StringComparison.OrdinalIgnoreCase))
+            //    return 3 * factor;
+
 #if !PCL
             return entityType.BaseType == typeof(object)
                 ? null

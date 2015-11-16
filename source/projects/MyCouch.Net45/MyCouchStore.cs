@@ -109,7 +109,7 @@ namespace MyCouch
             return response.Content;
         }
 
-        public async virtual Task<DocumentHeader> SetAsync(string id, string doc)
+        public virtual async Task<DocumentHeader> SetAsync(string id, string doc)
         {
             ThrowIfDisposed();
 
@@ -123,14 +123,15 @@ namespace MyCouch
                 : await StoreAsync(header.Id, header.Rev, doc).ForAwait();
         }
 
-        public async virtual Task<T> SetAsync<T>(T entity) where T : class
+        public virtual async Task<T> SetAsync<T>(T entity) where T : class
         {
             ThrowIfDisposed();
 
             Ensure.That(entity, "entity").IsNotNull();
 
             var id = Client.Entities.Reflector.IdMember.GetValueFrom(entity);
-            Ensure.That(id, "EntityId").IsNotNullOrWhiteSpace();
+            var idPropName = Client.Entities.Reflector.IdMember.GetPropertyNameFor(entity.GetType());
+            Ensure.That(id, idPropName).IsNotNullOrWhiteSpace();
 
             var header = await GetHeaderAsync(id).ForAwait();
             if (header != null)

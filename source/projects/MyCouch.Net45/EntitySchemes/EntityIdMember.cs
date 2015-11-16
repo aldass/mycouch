@@ -23,17 +23,17 @@ namespace MyCouch.EntitySchemes
             if (membername.Equals("_id", StringComparison.OrdinalIgnoreCase))
                 return 0 * factor;
 
-            if (membername.Equals(string.Concat(entityType.Name, "id"), StringComparison.OrdinalIgnoreCase))
+            if (membername.Equals("id", StringComparison.OrdinalIgnoreCase))
                 return 1 * factor;
 
-            if (membername.Equals("documentid", StringComparison.OrdinalIgnoreCase))
+            if (membername.Equals(string.Concat(entityType.Name, "id"), StringComparison.OrdinalIgnoreCase))
                 return 2 * factor;
 
-            if (membername.Equals("entityid", StringComparison.OrdinalIgnoreCase))
-                return 3 * factor;
+            //if (membername.Equals("documentid", StringComparison.OrdinalIgnoreCase))
+            //    return 2 * factor;
 
-            if (membername.Equals("id", StringComparison.OrdinalIgnoreCase))
-                return 4 * factor;
+            //if (membername.Equals("entityid", StringComparison.OrdinalIgnoreCase))
+            //    return 3 * factor;
 
 #if !PCL
             return entityType.BaseType == typeof(object)
